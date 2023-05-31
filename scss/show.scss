@@ -1,0 +1,77 @@
+section{
+    width: 100%; height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    article{
+        width: 100%; height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1;
+
+        video{
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .slogan{
+            position: absolute;
+            top: 50%;
+            right: 8%;
+            transform: translateY(-60%);
+            text-align: right;
+            // 배치하려는 곳이 전체 화면에서 가운데가 아닌 사이드바를 제외한 영상의 가운데에 배치하는 느낌을 주기 위해 오른쪽 정렬
+            padding: 50px;
+
+            h2{
+                display: inline-block;
+                overflow: hidden;
+                position: relative;
+                margin-bottom: 20px;
+                // 05.31 이후에 다시 예제를 꺼내서 추가 내용 공부할거라 미리 코딩해 둔게 몇 개 있다.
+
+                .inner{
+                    font: 200px/1 "Abril Fatface";
+                    color: #fff;
+                    position: relative;
+                    transform: scaleY(1.25);
+                    opacity: 0;
+                    transition: opacity 0.2s 0.5s;
+                    // 박스가 나온 뒤에 글자가 나타나야해서 0.5초의 딜레이를 주었다.
+                }
+
+                &::after{
+                    // 여기서부터 마스크효과
+                    content: "";
+                    display: block;
+                    width: 100%;
+                    height: 100%;
+                    background-color: #fff;
+                    // 마스크효과의 색을 하얀색으로 주었다.
+                    position: absolute;
+                    top: 0;
+                    right: -100%;
+                    transition: right ease-in-out 1s;
+                }
+            }
+        }
+
+        &.on{
+            z-index: 3;
+            // 5보다는 작아야한다. header에서 z index 값을 5를 주었으니까!
+            .slogan{
+                h2{
+                    .inner{
+                        opacity: 1;
+                    }
+                    &::after{
+                        right: 100%;
+                    }
+                }
+            }
+        }
+    }
+}
